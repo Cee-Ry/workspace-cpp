@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <print>
@@ -28,6 +29,22 @@ int main() {
   clangd << "  Add: [-std=c++23, -I../include]\n";
   clangd.close();
   println("{}[SUCCESS]:{} .clangd was created successfully", GREEN, RESET);
+
+  ofstream cnr("compileNrun");
+  if (!clangd) {
+    println(stderr, "{}[WARNING]:{} compileNrun failed to open for writing!", RED, RESET);
+    return 1;
+  }
+
+  cnr << "#!/bin/bash\n";
+  cnr << "rm -f main\n";
+  cnr << "g++ -std=c++23 src/*.cpp -o main\n";
+  cnr << "./main\n";
+  cnr.close();
+  println("{}[SUCCESS]:{} compileNrun was created successfully", GREEN, RESET);
+
+  system("chmod +x compileNrun");
+  println("{}[SUCCESS]:{} compileNrun is now an executable file", GREEN, RESET);
 
   return 0;
 }
