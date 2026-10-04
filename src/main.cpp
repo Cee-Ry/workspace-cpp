@@ -38,7 +38,7 @@ int main() {
 
   cnr << "#!/bin/bash\n";
   cnr << "rm -f main\n";
-  cnr << "g++ -std=c++23 src/*.cpp -o main\n";
+  cnr << "g++ -std=c++23 -Iinclude src/*.cpp -o main\n";
   cnr << "./main\n";
   cnr.close();
   println("{}[SUCCESS]:{} compileNrun was created successfully", GREEN, RESET);
