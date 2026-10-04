@@ -43,6 +43,19 @@ int main() {
   cnr.close();
   println("{}[SUCCESS]:{} compileNrun was created successfully", GREEN, RESET);
 
+  ofstream maincpp("src/main.cpp");
+  if (!maincpp) {
+    println(stderr, "{}[WARNING]:{} src/main.cpp failed to open for writing!", RED, RESET);
+    return 1;
+  }
+
+  maincpp << "#include <print>\n";
+  maincpp << "using namespace std;\n\n";
+  maincpp << "int main() {\n";
+  maincpp << "  println(\"Hello, World!\");\n\n";
+  maincpp << "  return 0;\n}";
+
+
   system("chmod +x compileNrun");
   println("{}[SUCCESS]:{} compileNrun is now an executable file", GREEN, RESET);
 
